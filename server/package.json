@@ -1,0 +1,20 @@
+{
+  "name": "hiro_music_server",
+  "version": "1.0.0",
+  "description": "Server side of hiro music",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Hiro",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "firebase": "^9.15.0",
+    "yt-search": "^2.10.3",
+    "ytdl-core": "^4.11.2"
+  },
+  "type": "module"
+}
