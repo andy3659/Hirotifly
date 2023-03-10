@@ -1,7 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import internal from "stream";
-import { audioExist, getAudioDirectUrl } from "../../../functions/firebase";
+import { saveAudioFile } from "../../../functions/fileSystem";
+import { deleteAudioFile } from "../../../functions/fileSystem/deleteAudioFile";
+import {
+  audioExist,
+  getAudioDirectUrl,
+  setAudioToDatabase,
+  uploadAudio,
+} from "../../../functions/firebase";
 import {
   getVideoInfo,
   getAudioStream,
@@ -26,5 +33,13 @@ export default async function handler(
   res.setHeader("Content-Length", contentLength);
   res.setHeader("Accept-Ranges", "bytes");
   res.setHeader("Connection", "keep-alive");
-  res.status(200).json(stream);
+  saveAudioFile({ stream, videoId }).on("finish", async () => {
+    console.log("Audio Downloaded");
+    const uploadFinished = await uploadAudio(videoId);
+    if (uploadFinished) {
+      setAudioToDatabase(videoId);
+      deleteAudioFile(videoId);
+    }
+  });
+  stream.pipe(res);
 }
