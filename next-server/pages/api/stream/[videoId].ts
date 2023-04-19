@@ -39,7 +39,7 @@ export default async function handler(
     if (uploadFinished) {
       await setAudioToDatabase(videoId);
       deleteAudioFile(videoId);
+      stream.pipe(res);
     }
   });
-  stream.pipe(res);
 }
