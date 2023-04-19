@@ -34,10 +34,10 @@ export default async function handler(
   res.setHeader("Accept-Ranges", "bytes");
   res.setHeader("Connection", "keep-alive");
   saveAudioFile({ stream, videoId }).on("finish", async () => {
-    console.log("Audio Downloaded");
+    console.log(`${videoId}.m4a saved on local storage.`);
     const uploadFinished = await uploadAudio(videoId);
     if (uploadFinished) {
-      setAudioToDatabase(videoId);
+      await setAudioToDatabase(videoId);
       deleteAudioFile(videoId);
     }
   });

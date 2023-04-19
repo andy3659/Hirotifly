@@ -15,6 +15,7 @@ const uploadAudio = async (videoId: string) => {
   const result = await uploadBytes(storageRef, audioFile, {
     contentType: "audio/mp4",
   });
+  console.log(`${videoId}.m4a uploaded`);
   return result;
 };
 export { uploadAudio };

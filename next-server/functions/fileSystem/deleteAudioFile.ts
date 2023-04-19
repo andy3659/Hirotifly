@@ -9,7 +9,7 @@ const deleteAudioFile = (videoId: string) => {
     } else if (err) {
       console.error("Error occurred while trying to remove file");
     } else {
-      console.log("Local File Deleted");
+      console.log(`${videoId}.m4a file deleted from local storage.`);
     }
   });
 };
