@@ -6,6 +6,10 @@ import usePlayer from "../../stores/usePlayer";
 import useSearch from "../../stores/useSearch";
 import { musicObject } from "../../types";
 import MusicItem from "../music-item/music-item";
+
+import config from "../../config.json";
+const API_BASE_URL = config.apiBaseUrl;
+
 function SearchResult() {
   const isLoading = useSearch((state) => state.isLoading);
   const searchResult = useSearch((state) => state.searchResult);
@@ -13,10 +17,11 @@ function SearchResult() {
   const navigation = useNavigation<any>();
 
   const musicPressHandler = async (item: musicObject) => {
+    console.log(item);
     const queueSize = (await TrackPlayer.getQueue()).length;
     const added = await TrackPlayer.add(
       {
-        url: `https://hiro-music.cyclic.app/stream/${item.id}`,
+        url: `${API_BASE_URL}/stream/${item.id}`,
         title: item.title,
         artist: item.author,
         artwork: item.image,
@@ -71,7 +76,7 @@ function SearchResult() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#36393e",
+    backgroundColor: "#1C1E21",
     marginHorizontal: 15,
     marginTop: 10,
     flex: 1,

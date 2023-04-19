@@ -20,7 +20,7 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#36393e",
+    backgroundColor: "#1C1E21",
   },
 });
 

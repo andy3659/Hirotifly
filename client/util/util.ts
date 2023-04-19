@@ -1,12 +1,15 @@
 import { Track } from "react-native-track-player";
 import { musicObject } from "../types";
 
+import config from "../config.json";
+const API_BASE_URL = config.apiBaseUrl;
+
 const util = {
   musicsToTracks(musics: musicObject[]) {
     const h: Track[] = [];
     musics.forEach((e) => {
       let temp: Track = { url: "" };
-      temp.url = `https://hiro-music.cyclic.app/stream/${e.id}`;
+      temp.url = `${API_BASE_URL}${e.id}`;
       temp.title = e.title;
       temp.duration = e.seconds;
       temp.artist = e.author;

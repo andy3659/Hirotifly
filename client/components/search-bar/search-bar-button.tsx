@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textGray: {
-    color: "#36393e",
+    color: "#1C1E21",
     fontSize: 14,
   },
 });

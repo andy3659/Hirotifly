@@ -1,28 +1,32 @@
-import { debounce } from "lodash-es";
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import TrackPlayer, {
   State,
   usePlaybackState,
 } from "react-native-track-player";
-import { Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, View } from "react-native";
 import BackwardIcon from "../../assets/backward-icon";
 import ForwardIcon from "../../assets/forward-icon";
 import PauseIcon from "../../assets/pause-icon";
 import PlayIcon from "../../assets/play-icon";
+import { useDebouncedValue } from "../../hooks";
 
 function ControllerButtons() {
-  const state = usePlaybackState();
+  const state = usePlaybackState().state;
   const isPLaying = state === State.Playing;
-  const isLoading = debounce(
-    () => state === State.Connecting || state === State.Buffering,
+  const isLoading = useDebouncedValue(
+    state === State.Loading || state === State.Buffering,
     250
   );
+
   const PausePlayButton = () => {
+    if (isLoading) {
+      return <ActivityIndicator size={"small"} color={"#ffbf00"} />;
+    }
     if (isPLaying) {
       return (
         <Pressable
           style={styles.controllerButton}
-          disabled={isLoading()}
+          disabled={isLoading}
           onPress={TrackPlayer.pause}
         >
           <PauseIcon />
@@ -32,7 +36,7 @@ function ControllerButtons() {
       return (
         <Pressable
           style={styles.controllerButton}
-          disabled={isLoading()}
+          disabled={isLoading}
           onPress={TrackPlayer.play}
         >
           <PlayIcon />
@@ -40,21 +44,34 @@ function ControllerButtons() {
       );
     }
   };
-  return (
-    <View style={styles.playerControllerContainer}>
+
+  const PreviousButton = () => {
+    return (
       <Pressable
         style={styles.controllerButton}
         onPress={() => TrackPlayer.skipToPrevious()}
       >
         <BackwardIcon />
       </Pressable>
-      <PausePlayButton />
+    );
+  };
+
+  const NextButton = () => {
+    return (
       <Pressable
         style={styles.controllerButton}
         onPress={() => TrackPlayer.skipToNext()}
       >
         <ForwardIcon />
       </Pressable>
+    );
+  };
+
+  return (
+    <View style={styles.playerControllerContainer}>
+      <PreviousButton />
+      <PausePlayButton />
+      <NextButton />
     </View>
   );
 }

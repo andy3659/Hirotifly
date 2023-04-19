@@ -7,7 +7,7 @@ interface index {
 
 const PlaylistIcon = ({ index, ...props }: SvgProps & index) => {
   const activeIndex = useViewPager((state) => state.index);
-  const color = index == activeIndex ? "#36393e" : "#ffbf00";
+  const color = index == activeIndex ? "#1C1E21" : "#ffbf00";
   return (
     <Svg width={28} height={24} fill="none" {...props}>
       <Path

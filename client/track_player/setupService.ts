@@ -7,7 +7,7 @@ export const SetupService = async (): Promise<boolean> => {
   let isSetup = false;
   try {
     // this method will only reject if player has not been setup yet
-    await TrackPlayer.getCurrentTrack();
+    await TrackPlayer.getActiveTrackIndex();
     isSetup = true;
   } catch {
     await TrackPlayer.setupPlayer();
@@ -16,8 +16,6 @@ export const SetupService = async (): Promise<boolean> => {
         appKilledPlaybackBehavior:
           AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
       },
-      // This flag is now deprecated. Please use the above to define playback mode.
-      // stoppingAppPausesPlayback: true,
       capabilities: [
         Capability.Play,
         Capability.Pause,

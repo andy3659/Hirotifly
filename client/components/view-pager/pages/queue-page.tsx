@@ -15,9 +15,9 @@ function QueuePage() {
   const playingIndex = usePlayer((state) => state.playingIndex);
   const backgroundColor = (index: number) => {
     if (playingIndex == index) {
-      return { backgroundColor: "#ffbf00", color: "#36393e" };
+      return { backgroundColor: "#ffbf00", color: "#1C1E21" };
     } else {
-      return { backgroundColor: "#36393e", color: "#ffbf00" };
+      return { backgroundColor: "#1C1E21", color: "#ffbf00" };
     }
   };
 

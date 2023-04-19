@@ -1,5 +1,6 @@
 import { musicObject } from "../types";
-const API_BASE_URL = "https://hiro-music.cyclic.app/";
+import config from "../config.json";
+const API_BASE_URL = config.apiBaseUrl;
 
 const musicApi = {
   async searchMusic(keyword: string): Promise<musicObject[]> {
@@ -9,6 +10,7 @@ const musicApi = {
     const url = encodeURI(urlString);
     try {
       const response = await fetch(url);
+      console.log(response);
       const data = await response.json();
       hasil = data;
     } catch (error) {

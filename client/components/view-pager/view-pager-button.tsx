@@ -25,7 +25,7 @@ function ViewPagerButton({
 }: ViewPagerButtonType) {
   const activeIndex = useViewPager((state) => state.index);
   const bgColor = index == activeIndex ? "#ffbf00" : "rgba(255, 191, 0, 0)";
-  const textColor = index == activeIndex ? "#36393e" : "#ffbf00";
+  const textColor = index == activeIndex ? "#1C1E21" : "#ffbf00";
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>

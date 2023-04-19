@@ -53,7 +53,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
   textInput: {
-    color: "#36393e",
+    color: "#1C1E21",
     height: 24,
     flex: 1,
     fontSize: 14,

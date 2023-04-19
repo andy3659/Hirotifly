@@ -36,8 +36,8 @@ function MusicItem({
   const playingIndex = usePlayer((state) => state.playingIndex);
   const isActive = index == playingIndex && activeable == true;
   const activeStyle = isActive
-    ? { backgroundColor: "#ffbf00", color: "#36393e", display: "none" }
-    : { backgroundColor: "#36393e", color: "#ffbf00", display: "flex" };
+    ? { backgroundColor: "#ffbf00", color: "#1C1E21", display: "none" }
+    : { backgroundColor: "#1C1E21", color: "#ffbf00", display: "flex" };
   const OptionButton = () => {
     if (isActive) return <></>;
     else {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: "row",
     overflow: "hidden",
-    backgroundColor: "#36393e",
+    backgroundColor: "#1C1E21",
   },
   imageAndTitleContainer: {
     flex: 10,
