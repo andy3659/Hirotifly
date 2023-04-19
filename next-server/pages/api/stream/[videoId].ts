@@ -25,7 +25,6 @@ export default async function handler(
     res.redirect(await getAudioDirectUrl(videoId));
     return;
   }
-
   const info = await getVideoInfo(videoId);
   const stream = getAudioStream(info);
   const contentLength = getContentLength(info);
@@ -33,13 +32,10 @@ export default async function handler(
   res.setHeader("Content-Length", contentLength);
   res.setHeader("Accept-Ranges", "bytes");
   res.setHeader("Connection", "keep-alive");
-  saveAudioFile({ stream, videoId }).on("finish", async () => {
-    console.log(`${videoId}.m4a saved on local storage.`);
-    const uploadFinished = await uploadAudio(videoId);
-    if (uploadFinished) {
-      await setAudioToDatabase(videoId);
-      deleteAudioFile(videoId);
-      stream.pipe(res);
-    }
-  });
+  await saveAudioFile({ stream, videoId });
+  console.log(`${videoId}.m4a saved on local storage.`);
+  await uploadAudio(videoId);
+  await setAudioToDatabase(videoId);
+  deleteAudioFile(videoId);
+  res.redirect(await getAudioDirectUrl(videoId));
 }
